@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
-    <title>URL library tests</title>
 <head>
+    <title>URL library tests</title>
     <script src="../url.min.js"></script>
 </head>
 <body>
@@ -41,6 +41,7 @@
     }
 
     function getCurrLocation() {
+        console.log(document.location);
         if (document.location.href === 'about:srcdoc') {
             return self.parent.document.location;
         } else {
