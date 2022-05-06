@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IETify</title>
+    <link rel="icon" type="image/x-icon" href="https://facebook.com/favicon.ico">
+</head>
+<body>
+    <script src="url.js"></script>
+    <script>
+        let url  = new Url();
+
+        // support functions-----------------------------------------------------------------------------------------------------------
+        function assertEqual(a, b, name) {
+            if (a == b) {
+                document.write('<span style="color: green">' + name + " &mdash; Passed</span> ( '" + a + "' == '" + b + "')<br>");
+            } else {
+                document.write('<b style="color: red">' + name + "&mdash; Failed</b>( '" + a + "' != '" + b + "')<br>");
+            }
+        }
+
+        function assertNotEqual(a, b, name) {
+            if (a != b) {
+                document.write('<span style="color: green">' + name + " &mdash; Passed</span> ( '" + a + "' == '" + b + "')<br>");
+            } else {
+                document.write('<b style="color: red">' + name +"&mdash; Failed</b>( '" + a + "' != '" + b + "')<br>");
+            }
+        }    
+
+        function insertHorizontalLine(){
+            document.write("<hr>");
+        }
+        // -----------------------------------------------------------------------------------------------------------
+
+
+        /**
+         * Tests for URL manipulation.
+         */
+        // Test 1 - success for path
+        url.path = "/test1";
+        url.query.test1 = 100
+        assertEqual(url, "http://127.0.0.1:5500/test1?test1=100", "Assert Equal route test");
+
+        // Test 1 - fail for path
+        url.clearQuery();
+        url.path = "/test2";
+        assertNotEqual(url.path, "/test1", "Assert NOT equal path test");
+
+        // Test 1 - fail for params
+        url.clearQuery();
+        url.path = "/test1";
+        url.query.test1 = 200
+        assertNotEqual(url.query, "?test1=100", "Assert NOT equal params test");
+        
+
+        insertHorizontalLine();
+        /**
+         * 
+         */
+        // Test 2 
+        url  = new Url("http://localhost:5500/test1?test1=100#anchor");
+        assertEqual(url, "http://localhost:5500/test1?test1=100#anchor", "Assert Equal url test");
+        assertEqual(url.protocol, "http", "Assert Equal protocol test");
+        assertEqual(url.host, "localhost", "Assert Equal host test");
+        assertEqual(url.port, "5500", "Assert Equal port test");
+        assertEqual(url.path, "/test1", "Assert Equal path test");
+        assertEqual(url.query, "test1=100", "Assert Equal query test");
+        assertEqual(url.query.test1, "100", "Assert Equal query param test");
+        assertEqual(url.hash, "anchor", "Assert Equal anchor test");
+
+        insertHorizontalLine();       
+        /**
+         * 
+         */
+        // Test 3 compare relative and absolute url
+        url  = new Url("/test2?test1=100");
+        url2 = new Url(`${self.parent.document.location.href}`);
+        assertNotEqual(url, url2, "Assert NOT Equal url test");
+        assertNotEqual(url.query, url2.query, "Assert NOT Equal query params test");
+        assertNotEqual(url.path, url2.path, "Assert NOT Equal path test");
+        assertEqual(url.port, url2.port, "Assert Equal port test");
+        
+        
+
+    </script>
+</body>
+</html>
