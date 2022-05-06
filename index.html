@@ -36,98 +36,54 @@
 
 
         /**
-         * Tests for simple URL manipulation tests.
+         * Tests for URL manipulation.
          */
         // Test 1 - success for path
-        url.host = "localhost" // convert local page url to localhost
-        url.port = 5500
         url.path = "/test1";
         url.query.test1 = 100
-        assertEqual(url, "http://localhost:5500/test1?test1=100", "Assert Equal route test");
+        assertEqual(url, "http://127.0.0.1:5500/test1?test1=100", "Assert Equal route test");
 
         // Test 1 - fail for path
         url.clearQuery();
         url.path = "/test2";
         assertNotEqual(url.path, "/test1", "Assert NOT equal path test");
 
-        // Test 1 - success for params
-        url.clearQuery();
-        url.query.test1 = 100
-        assertEqual(url.query, "test1=100", "Assert equal params test");
-        
         // Test 1 - fail for params
         url.clearQuery();
-        url.query.test1 = 100
-        assertNotEqual(url.query, "?test1=111", "Assert NOT equal params test");
-
-        // Test 1 - success for path and params
-        url.clearQuery();
         url.path = "/test1";
-        url.query.test1 = 100
-        url.query.test12 = "teszt12"
-        assertEqual(`${url.path}?${url.query}`, "/test1?test1=100&test12=teszt12", "Assert equal path & params test");
-
-        // Test 1 - fail for path and params
-        url.clearQuery();
-        url.path = "/test1";
-        url.query.test1 = 100
-        url.query.test12 = "teszt1"
-        assertNotEqual(`${url.path}?${url.query}`, "/test1?test1=nem100&test12=nemteszt12", "Assert NOT equal path & params test");
+        url.query.test1 = 200
+        assertNotEqual(url.query, "?test1=100", "Assert NOT equal params test");
         
 
         insertHorizontalLine();
         /**
-         * Test 2 - Full URL test
+         * 
          */
-        url  = new Url("http://localhost:5500/test2?test2=100#anchor");
-        assertEqual(url, "http://localhost:5500/test2?test2=100#anchor", "Assert Equal url test");
+        // Test 2 
+        url  = new Url("http://localhost:5500/test1?test1=100#anchor");
+        assertEqual(url, "http://localhost:5500/test1?test1=100#anchor", "Assert Equal url test");
         assertEqual(url.protocol, "http", "Assert Equal protocol test");
         assertEqual(url.host, "localhost", "Assert Equal host test");
         assertEqual(url.port, "5500", "Assert Equal port test");
-        assertEqual(url.path, "/test2", "Assert Equal path test");
-        assertEqual(url.query, "test2=100", "Assert Equal query test");
-        assertEqual(url.query.test2, "100", "Assert Equal query param test");
+        assertEqual(url.path, "/test1", "Assert Equal path test");
+        assertEqual(url.query, "test1=100", "Assert Equal query test");
+        assertEqual(url.query.test1, "100", "Assert Equal query param test");
         assertEqual(url.hash, "anchor", "Assert Equal anchor test");
 
-        insertHorizontalLine();
-
+        insertHorizontalLine();       
         /**
-         * Test 3 - Clear query test
+         * 
          */
-        // Test 3
-        url = new Url('http://localhost:5500/test3?test3=100#anchor');
-        url.host = "localhost" // convert local page url to localhost
-        url.clearQuery();
-        assertEqual(url, 'http://localhost:5500/test3#anchor', "Assert equal clear query test");
+        // Test 3 compare relative and absolute url
+        url  = new Url("/test2?test1=100");
+        url2 = new Url(`${self.parent.document.location.href}`);
+        assertNotEqual(url, url2, "Assert NOT Equal url test");
+        assertNotEqual(url.query, url2.query, "Assert NOT Equal query params test");
+        assertNotEqual(url.path, url2.path, "Assert NOT Equal path test");
+        assertEqual(url.port, url2.port, "Assert Equal port test");
         
-        insertHorizontalLine();
+        
 
-        /**
-         * Test 4 - Relative URL test
-         */
-        url = new Url("../test4.html?test4=100#anchor");
-        url.host = "localhost" // convert local page url to localhost
-        console.log(url);
-        assertEqual(url, "http://localhost:5500/test4.html?test4=100#anchor", "Assert Equal url test");
-        assertEqual(url.protocol, "http", "Assert Equal protocol test");
-        assertEqual(url.host, "localhost", "Assert Equal host test");
-        assertEqual(url.port, "5500", "Assert Equal port test");
-        assertEqual(url.path, "/test4.html", "Assert Equal path test");
-        assertEqual(url.query, "test4=100", "Assert Equal query test");
-        assertEqual(url.query.test4, "100", "Assert Equal query param test");
-        assertEqual(url.hash, "anchor", "Assert Equal anchor test");
-
-        insertHorizontalLine();
-
-        /**
-         * Test 5 - Case sensitivity test
-         */
-        // Test 5
-        const u1 = new Url("http://localhost:5500/test5?test5=test#anchor");
-        const u2 = new Url("http://localhost:5500/test5?test5=TEST#anchor");
-        assertNotEqual(u1, u2, "Assert NOT equal case sensitive test");
-
-        insertHorizontalLine();
     </script>
 </body>
 </html>
