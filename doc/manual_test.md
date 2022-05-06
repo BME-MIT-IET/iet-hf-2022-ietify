@@ -16,3 +16,5 @@
 ## Tanulságok
 > Mégjobban megismertem a domurl library működését a tesztesetek írása alatt, így már tudom, hogy az URL mely részeit hogy lehet vele manipulálni, valamint hogy célszerű teszteket írni, hogy lefedje a library tudását. (@Hooder)
 
+> A tesztesetek megírása során szereztem kis tapasztalatot illetve a domurl projekt célját és működését is jobban megértettem (@Xpx22).
+
