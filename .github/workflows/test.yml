@@ -16,12 +16,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: 'Cache node_modules'
         uses: actions/cache@v2
-        with: ~./.npm
-        key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-            ${{ runner.os }}-node-v16-
+        with:
+          path: ~./.npm
+          key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+              ${{ runner.os }}-node-v16-
+              
       - name: Install Dependencies
         run: npm install
+
       - name: Run mocha tests
         run: npm run test
 
