@@ -2,7 +2,7 @@ name: Run mocha tests
 on:
   push:
     branches:
-      - main
+      - '**'
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
@@ -17,7 +17,6 @@ jobs:
       - name: 'Cache node_modules'
         uses: actions/cache@v2
         with: ~./.npm
-        # use cache with 
         key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
             ${{ runner.os }}-node-v16-
