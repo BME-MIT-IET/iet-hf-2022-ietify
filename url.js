@@ -378,9 +378,14 @@
             }
 
             for (s = paths.length; i < s; i++) {
-                paths[i] = !i && RX_PATH_SEMI.test(paths[i])
-                    ? paths[i]
-                    : encode(paths[i]);
+                 if(paths[i].includes('+')){
+                    while(paths[i].includes("+"))
+                        paths[i] = paths[i].replace("+", "%2b")
+                 } else  if(!paths[i].includes('%')){
+                       paths[i] = !i && RX_PATH_SEMI.test(paths[i])
+                       ? paths[i]
+                       : encode(paths[i]);
+                 }
             }
 
             this.path = prefix + paths.join('/');
@@ -389,9 +394,9 @@
         paths = (this.path.charAt(0) === '/' ?
             this.path.slice(1) : this.path).split('/');
 
-        for (i = 0, s = paths.length; i < s; i++) {
-            paths[i] = decode(paths[i]);
-        }
+        //for (i = 0, s = paths.length; i < s; i++) {
+        //    paths[i] = decode(paths[i]);
+        //}
 
         return paths;
     };
