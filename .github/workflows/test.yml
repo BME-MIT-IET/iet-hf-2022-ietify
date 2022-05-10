@@ -15,7 +15,7 @@ jobs:
           node-version: '16'
       - uses: actions/checkout@v2
       - name: 'Cache node_modules'
-      - uses: actions/cache@v2
+        uses: actions/cache@v2
         with: ~./.npm
         # use cache with 
         key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
