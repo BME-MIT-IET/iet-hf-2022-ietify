@@ -1,7 +1,7 @@
-# Manual testing
+# BDD testing
 
 ## Elvégzett munka:
-> Ebben a feladatban a manuális teszteket terveztünk és végrehajtottunk.
+> Ebben a feladatban a bdd teszteket terveztünk és végrehajtottunk. A tesztek megírásához a Cucumber npm libraryt használtuk.
 
 ## Tervezése:
 1. Az URL alapvető path és query paramétereinek tesztelése (path, query, path&query). 
