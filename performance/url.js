@@ -35,6 +35,46 @@ const everything_url = new Url(
   "http://username:password@subdomain1.subdomain2.test.com:8080/path1/path2/?key1=value1&key2=value2#fragment"
 );
 
+const plus_url = new Url(
+  "http://username:password@subdomain1.subdomain2.test.com:8080/path1/path2/?key1=value+values1&key2=value2#fragment"
+);
+
+const long_gibbrish = new Url("國上海中國中國上海中國中國上海中國中");
+
+const medium_gibbrish = new Url("國上海中國中國上海中國中");
+
+const short_gibbrish = new Url("國上海中國中");
+
+const short_url_short_gibbrish = new Url(
+  `http://testeurl.com/test?key1=${short_gibbrish}`
+);
+const medium_url_short_gibbrish = new Url(
+  `http://subdomain.testeurl.com/test/test?key1=value1&key2=value2&key3=value3&key4=${short_gibbrish}`
+);
+const long_url_short_gibbrish = new Url(
+  `http://username:password@subdomain1.subdomain2.test.com/path1/path2?key1=value1&key2=${short_gibbrish}#fragment`
+);
+
+const short_url_medium_gubbrish = new Url(
+  `http://te.com/test?key1=${medium_gibbrish}`
+);
+const medium_url_medium_gibbrish = new Url(
+  `http://subdomain.testeurl.com/test/test?key1=value1&key2=value2&key3=${short_gibbrish}&key4=${short_gibbrish}`
+);
+const long_url_medium_gibbrish = new Url(
+  `http://username:password@subdomain1.subdomain2.test.com/path1/path2?key1=${short_gibbrish}&key2=${short_gibbrish}#fragment`
+);
+
+const short_url_long_gubbrish = new Url(`http://t.c/t?key1=${long_gibbrish}`);
+const medium_url_long_gibbrish = new Url(
+  `http://subdomain.testeurl.com/test/test?key1=value1&key2=${short_gibbrish}&key3=${short_gibbrish}&key4=${short_gibbrish}`
+);
+const long_url_long_gibbrish = new Url(
+  `http://username:password@subdomain1.subdomain2.test.com/path1/path2?key1=${short_gibbrish}&key2=${short_gibbrish}#fr${short_gibbrish}`
+);
+
+
+
 b.suite(
   "clearQuery function",
 
@@ -175,5 +215,55 @@ b.suite(
 
   b.add("empty url", () => {
     empty_url.encode(empty_url);
-  })
+  }),
+  b.add("short gibbrish", () => {
+    short_gibbrish.encode(short_gibbrish);
+  }),
+  b.add("medium gibbrish", () => {
+    medium_gibbrish.encode(medium_gibbrish);
+  }),
+  b.add("long gibbrish ", () => {
+    long_gibbrish.encode(long_gibbrish);
+  }),
+  b.add("short url", () => {
+    short.encode(short);
+  }),
+  b.add("short url with short gibbrish", () => {
+    short_url_short_gibbrish.encode(short_url_short_gibbrish);
+  }),
+  b.add("short url with medium gibbrish", () => {
+    short_url_medium_gubbrish.encode(short_url_medium_gubbrish);
+  }),
+  b.add("short url with long gibbrish", () => {
+    short_url_long_gubbrish.encode(short_url_long_gubbrish);
+  }),
+  b.add("medium url", () => {
+    medium.encode(medium);
+  }),
+  b.add("medium url with short gibbrish", () => {
+    medium_url_short_gibbrish.encode(medium_url_short_gibbrish);
+  }),
+  b.add("medium url with medium gibbrish ", () => {
+    medium_url_medium_gibbrish.encode(medium_url_medium_gibbrish);
+  }),
+  b.add("medium url with long gibbrish ", () => {
+    medium_url_long_gibbrish.encode(medium_url_long_gibbrish);
+  }),
+  b.add("long url", () => {
+    long_url.encode(long_url);
+  }),
+  b.add("long url with short gibbrish", () => {
+    long_url_short_gibbrish.encode(long_url_short_gibbrish);
+  }),
+  b.add("long url with medium gibbrish ", () => {
+    long_url_medium_gibbrish.encode(long_url_medium_gibbrish);
+  }),
+  b.add("long url with long gibbrish ", () => {
+    long_url_long_gibbrish.encode(long_url_long_gibbrish);
+  }),
+
+  b.cycle(),
+  b.complete(),
+  b.save({ file: "encode", version: "1.0.0", format: "chart.html" })
 );
+
