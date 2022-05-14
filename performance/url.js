@@ -3,7 +3,7 @@
 const b = require("benny");
 const Url = require("../url.min.js");
 
-const empty = new Url("");
+const empty_url = new Url("");
 const base_url = new Url("http://test.com");
 const auth_url = new Url("http://username:password@test.com");
 const subdomains_url = new Url("http://subdomain1.test.com");
@@ -67,11 +67,11 @@ b.suite(
   "toString function",
 
   b.add("empty", () => {
-    base_url.toString();
+    empty_url.toString();
   }),
 
   b.add("base url", () => {
-    u.toString();
+    base_url.toString();
   }),
 
   b.add("auth", () => {
@@ -115,11 +115,11 @@ b.suite(
   }),
 
   b.add("short (1 path + 2 key-value)", () => {
-    u2.toString();
+    short.toString();
   }),
 
   b.add("medium (1 path + 4 key-value)", () => {
-    u3.toString();
+    medium.toString();
   }),
 
   b.add("long (auth + subdomains + paths + key-value + fragment)", () => {
@@ -137,6 +137,34 @@ b.suite(
   b.complete(),
   b.save({
     file: "toString",
+    version: "1.0.0",
+    format: "chart.html",
+  })
+);
+
+b.suite(
+  "queryLength function",
+
+  b.add("empty url", () => {
+    empty_url.queryLength();
+  }),
+
+  b.add("url has no query parameters", () => {
+    base_url.queryLength();
+  }),
+
+  b.add("url has 2 keys", () => {
+    query_url.queryLength();
+  }),
+
+  b.add("url has 4 keys", () => {
+    many_query_url.queryLength();
+  }),
+
+  b.cycle(),
+  b.complete(),
+  b.save({
+    file: "QueryLength",
     version: "1.0.0",
     format: "chart.html",
   })
