@@ -34,11 +34,6 @@ const long_url = new Url(
 const everything_url = new Url(
   "http://username:password@subdomain1.subdomain2.test.com:8080/path1/path2/?key1=value1&key2=value2#fragment"
 );
-
-const plus_url = new Url(
-  "http://username:password@subdomain1.subdomain2.test.com:8080/path1/path2/?key1=value+values1&key2=value2#fragment"
-);
-
 const long_gibbrish = new Url("國上海中國中國上海中國中國上海中國中");
 
 const medium_gibbrish = new Url("國上海中國中國上海中國中");
@@ -72,8 +67,6 @@ const medium_url_long_gibbrish = new Url(
 const long_url_long_gibbrish = new Url(
   `http://username:password@subdomain1.subdomain2.test.com/path1/path2?key1=${short_gibbrish}&key2=${short_gibbrish}#fr${short_gibbrish}`
 );
-
-
 
 b.suite(
   "clearQuery function",
@@ -266,4 +259,3 @@ b.suite(
   b.complete(),
   b.save({ file: "encode", version: "1.0.0", format: "chart.html" })
 );
-
