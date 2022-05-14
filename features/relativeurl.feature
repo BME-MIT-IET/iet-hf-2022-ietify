@@ -1,6 +1,7 @@
 Feature: relativeurl
    Scenario: Relative Url
      Given test4 url is "../test4.html?test4=100#anchor"
+     Given test4 path is "/test4.html"
      Given test4 host is "localhost"
      Given test4 port is "5500"
      Given test4 protocol is "http"
