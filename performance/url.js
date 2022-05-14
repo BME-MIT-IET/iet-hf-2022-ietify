@@ -3,7 +3,7 @@
 const b = require("benny");
 const Url = require("../url.min.js");
 
-const empty = new Url("");
+const empty_url = new Url("");
 const base_url = new Url("http://test.com");
 const auth_url = new Url("http://username:password@test.com");
 const subdomains_url = new Url("http://subdomain1.test.com");
@@ -67,11 +67,11 @@ b.suite(
   "toString function",
 
   b.add("empty", () => {
-    base_url.toString();
+    empty_url.toString();
   }),
 
   b.add("base url", () => {
-    u.toString();
+    base_url.toString();
   }),
 
   b.add("auth", () => {
@@ -140,4 +140,14 @@ b.suite(
     version: "1.0.0",
     format: "chart.html",
   })
+);
+
+b.suite(
+  "encode function",
+
+  b.add("empty", () => {
+    empty_url.encode(empty_url);
+  })
+
+  
 );
