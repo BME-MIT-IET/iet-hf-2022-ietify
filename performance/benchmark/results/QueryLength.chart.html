@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <title>clearQuery function</title>
+    <title>clearLength function</title>
     <style>
       body {
         margin: 0;
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="container">
-      <canvas id="chart1652562647409" width="16" height="9"></canvas>
+      <canvas id="chart1652562757147" width="16" height="9"></canvas>
     </div>
     <script>
       const format = (num) => {
@@ -51,18 +51,18 @@
           chunked.map((chunk) => chunk.join('')).join(' ') + fractionStr
         )
       }
-      const ctx1652562647409 = document
-        .getElementById('chart1652562647409')
+      const ctx1652562757147 = document
+        .getElementById('chart1652562757147')
         .getContext('2d')
-      const chart1652562647409 = new Chart(ctx1652562647409, {
+      const chart1652562757147 = new Chart(ctx1652562757147, {
         type: 'bar',
         data: {
           labels: ["empty url","url has no query parameters","url has 2 keys","url has 4 keys"],
           datasets: [
             {
-              data: [8354290,8054826,8313240,1964109],
-              backgroundColor: ["hsl(120, 85%, 55%)","hsl(115.70400000000001, 85%, 55%)","hsl(119.412, 85%, 55%)","hsl(28.212000000000007, 85%, 55%)"],
-              borderColor: ["hsl(120, 85%, 55%)","hsl(115.70400000000001, 85%, 55%)","hsl(119.412, 85%, 55%)","hsl(28.212000000000007, 85%, 55%)"],
+              data: [6556645,7639133,7679822,1798331],
+              backgroundColor: ["hsl(102.444, 85%, 55%)","hsl(119.364, 85%, 55%)","hsl(120, 85%, 55%)","hsl(28.104000000000003, 85%, 55%)"],
+              borderColor: ["hsl(102.444, 85%, 55%)","hsl(119.364, 85%, 55%)","hsl(120, 85%, 55%)","hsl(28.104000000000003, 85%, 55%)"],
               borderWidth: 2,
             },
           ],
@@ -72,7 +72,7 @@
           plugins: {
             title: {
               display: true,
-              text: 'clearQuery function',
+              text: 'clearLength function',
               font: { size: 20 },
               padding: 20,
             },
