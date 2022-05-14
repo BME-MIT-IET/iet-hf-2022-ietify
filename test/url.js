@@ -178,3 +178,14 @@ describe('Path url encoding', function () {
         assert.equal(u.toString(), 'http://localhost/path%2b%20with%2b%20plus');
     })
 });
+
+describe('Path and query encoding differences', function(){
+    it('should correctly encode whitespaces in both query and path', function(){
+        const u = new Url('http://localhost/path with space?name=hello world')
+        assert.equal(u.toString(), 'http://localhost/path%20with%20space?name=hello%20world')
+    });
+    it('should correctly encode (+) in both query and path', function(){
+        const u = new Url('http://localhost/path+with+space?name=hello world')
+        assert.equal(u.toString(), 'http://localhost/path%2bwith%2bspace?name=hello%20world')
+    })
+})
