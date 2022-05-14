@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <title>clearQuery function</title>
+    <title>toString function</title>
     <style>
       body {
         margin: 0;
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="container">
-      <canvas id="chart1652560137512" width="16" height="9"></canvas>
+      <canvas id="chart1652560225232" width="16" height="9"></canvas>
     </div>
     <script>
       const format = (num) => {
@@ -51,18 +51,18 @@
           chunked.map((chunk) => chunk.join('')).join(' ') + fractionStr
         )
       }
-      const ctx1652560137512 = document
-        .getElementById('chart1652560137512')
+      const ctx1652560225232 = document
+        .getElementById('chart1652560225232')
         .getContext('2d')
-      const chart1652560137512 = new Chart(ctx1652560137512, {
+      const chart1652560225232 = new Chart(ctx1652560225232, {
         type: 'bar',
         data: {
-          labels: ["clearQuery has no url","clearQuery has 2 keys","clearQuery has 4 keys"],
+          labels: ["empty","base url","auth","subdomain","many subdomains","port","path","many path","long path","query","many query","fragment","short (1 path + 2 key-value)","medium (1 path + 4 key-value)","long (auth + subdomains + paths + key-value + fragment)","extra-long paths (auth + subdomains + paths + key-value + fragment)"],
           datasets: [
             {
-              data: [8252508,2040240,1847306],
-              backgroundColor: ["hsl(120, 85%, 55%)","hsl(29.663999999999998, 85%, 55%)","hsl(26.855999999999995, 85%, 55%)"],
-              borderColor: ["hsl(120, 85%, 55%)","hsl(29.663999999999998, 85%, 55%)","hsl(26.855999999999995, 85%, 55%)"],
+              data: [4195362,5280442,1254739,5148052,5260316,4884367,5052729,4987316,5122614,503056,140313,2036636,1811146,198732,699455,276151],
+              backgroundColor: ["hsl(95.34, 85%, 55%)","hsl(120, 85%, 55%)","hsl(28.512000000000008, 85%, 55%)","hsl(116.988, 85%, 55%)","hsl(119.54400000000001, 85%, 55%)","hsl(111, 85%, 55%)","hsl(114.828, 85%, 55%)","hsl(113.34, 85%, 55%)","hsl(116.412, 85%, 55%)","hsl(11.436000000000002, 85%, 55%)","hsl(3.191999999999996, 85%, 55%)","hsl(46.284, 85%, 55%)","hsl(41.16, 85%, 55%)","hsl(4.512000000000006, 85%, 55%)","hsl(15.9, 85%, 55%)","hsl(6.276000000000005, 85%, 55%)"],
+              borderColor: ["hsl(95.34, 85%, 55%)","hsl(120, 85%, 55%)","hsl(28.512000000000008, 85%, 55%)","hsl(116.988, 85%, 55%)","hsl(119.54400000000001, 85%, 55%)","hsl(111, 85%, 55%)","hsl(114.828, 85%, 55%)","hsl(113.34, 85%, 55%)","hsl(116.412, 85%, 55%)","hsl(11.436000000000002, 85%, 55%)","hsl(3.191999999999996, 85%, 55%)","hsl(46.284, 85%, 55%)","hsl(41.16, 85%, 55%)","hsl(4.512000000000006, 85%, 55%)","hsl(15.9, 85%, 55%)","hsl(6.276000000000005, 85%, 55%)"],
               borderWidth: 2,
             },
           ],
@@ -72,7 +72,7 @@
           plugins: {
             title: {
               display: true,
-              text: 'clearQuery function',
+              text: 'toString function',
               font: { size: 20 },
               padding: 20,
             },
