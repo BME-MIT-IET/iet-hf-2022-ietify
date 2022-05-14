@@ -195,7 +195,7 @@
     }
 
     function decode (s) {
-        s = s.replace(RX_PLUS, ' ');
+        s = s.replace(RX_PLUS, '+');
         s = s.replace(RX_DECODE_1, function (code, hex1, hex2, hex3) {
             var n1 = parseInt(hex1, 16) - 0xE0;
             var n2 = parseInt(hex2, 16) - 0x80;
@@ -370,23 +370,32 @@
     Url.prototype.paths = function (paths) {
         var prefix = '';
         var i = 0;
+        var spaceIterator = 0
         var s;
-
+        var subPaths = []
+        var subPath;
+        var spacesLength;
+        var spacesPath = []
+        var plusIterator = 0
         if (paths && paths.length && paths + '' !== paths) {
             if (this.isAbsolute()) {
                 prefix = '/';
             }
 
             for (s = paths.length; i < s; i++) {
-                 if(paths[i].includes('+')){
-                    while(paths[i].includes("+"))
-                        paths[i] = paths[i].replace("+", "%2b")
-                 } else  if(!paths[i].includes('%')){
-                       paths[i] = !i && RX_PATH_SEMI.test(paths[i])
-                       ? paths[i]
-                       : encode(paths[i]);
-                 }
-            }
+                spacesPath = paths[i].split(' ')
+                for(spacesLength = spacesPath.length;spaceIterator < spacesLength; spaceIterator++){
+                    subPaths = spacesPath[spaceIterator].split('+')
+                    for(subPath = subPaths.length; plusIterator < subPath; plusIterator++){
+                        subPaths[plusIterator] = !plusIterator && RX_PATH_SEMI.test(subPaths[plusIterator])
+                        ? subPaths[plusIterator]
+                        : encode(subPaths[plusIterator]);
+                    }
+                    spacesPath[spaceIterator] = subPaths.join('%2b')
+                }
+                paths[i] = spacesPath.join('%20')
+
+            }            
 
             this.path = prefix + paths.join('/');
         }
@@ -394,9 +403,9 @@
         paths = (this.path.charAt(0) === '/' ?
             this.path.slice(1) : this.path).split('/');
 
-        //for (i = 0, s = paths.length; i < s; i++) {
-        //    paths[i] = decode(paths[i]);
-        //}
+        for (i = 0, s = paths.length; i < s; i++) {
+            paths[i] = decode(paths[i]);
+        }
 
         return paths;
     };

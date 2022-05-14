@@ -173,4 +173,8 @@ describe('Path url encoding', function () {
         const u = new Url('http://localhost/path+with+plus');
         assert.equal(u.toString(), 'http://localhost/path%2bwith%2bplus');
     });
+    it('should correctly encode path with both (+) and ( )', function(){
+        const u  = new Url('http://localhost/path+ with+ plus')
+        assert.equal(u.toString(), 'http://localhost/path%2b%20with%2b%20plus');
+    })
 });
