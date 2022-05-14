@@ -195,7 +195,7 @@
     }
 
     function decode (s) {
-        s = s.replace(RX_PLUS, ' ');
+        s = s.replace(RX_PLUS, '+');
         s = s.replace(RX_DECODE_1, function (code, hex1, hex2, hex3) {
             var n1 = parseInt(hex1, 16) - 0xE0;
             var n2 = parseInt(hex2, 16) - 0x80;
@@ -370,19 +370,41 @@
     Url.prototype.paths = function (paths) {
         var prefix = '';
         var i = 0;
+        var spaceIterator = 0
         var s;
+        var subPaths = []
+        var subPath;
+        var spacesLength;
+        var spacesPath = []
+        var plusIterator = 0
 
+        //make sure path is available and set prefix
         if (paths && paths.length && paths + '' !== paths) {
             if (this.isAbsolute()) {
                 prefix = '/';
             }
-
+            //for each part of the path (path was split by (\) characters)
             for (s = paths.length; i < s; i++) {
-                paths[i] = !i && RX_PATH_SEMI.test(paths[i])
-                    ? paths[i]
-                    : encode(paths[i]);
-            }
-
+                spacesPath = paths[i].split(' ')
+                spaceIterator = 0
+                //for each part of the subpaths split by ( )
+                for(spacesLength = spacesPath.length;spaceIterator < spacesLength; spaceIterator++){
+                    subPaths = spacesPath[spaceIterator].split('+')
+                    plusIterator = 0
+                    //for each part of the subpath split by (+)
+                    for(subPath = subPaths.length; plusIterator < subPath; plusIterator++){
+                        //encode path if special characters were present
+                        subPaths[plusIterator] = !plusIterator && RX_PATH_SEMI.test(subPaths[plusIterator])
+                        ? subPaths[plusIterator]
+                        : encode(subPaths[plusIterator]);
+                    }
+                    //join path with encoded + => %2b
+                    spacesPath[spaceIterator] = subPaths.join('%2b')
+                }
+                //join path with encoded ( ) => %20
+                paths[i] = spacesPath.join('%20')
+            }            
+            //create full path by joining its parts with (\)
             this.path = prefix + paths.join('/');
         }
 

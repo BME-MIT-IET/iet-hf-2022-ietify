@@ -123,6 +123,9 @@ Then('I should get {string}', function (expected) {
 Given("test4 url is {string}", function(url){
   this.urlTest4 = new Url(url);
 });
+Given("test4 path is {string}", function(path){
+  this.urlTest4.path = path;
+});
 Given("test4 host is {string}", function(host){
   this.urlTest4.host = host;
 });
