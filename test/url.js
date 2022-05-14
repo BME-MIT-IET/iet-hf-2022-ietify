@@ -165,13 +165,27 @@ describe('Path url encoding', function () {
         const u = new Url('http://localhost/path with space');
         assert.equal(u.toString(),'http://localhost/path%20with%20space');
     });
-    // TODO: Fix https://github.com/Mikhus/domurl/issues/49
-    xit('should correctly encode Plus Sign (+) to %2b in path.', function () {
+    it('should correctly encode Plus Sign (+) to %2b in path.', function () {
         const u = new Url('http://localhost/path+with+plus');
         assert.equal(u.toString(), 'http://localhost/path%2bwith%2bplus');
     });
-    xit('should preserve Plus Sign (+) in path.', function () {
+    it('should preserve Plus Sign (+) in path.', function () {
         const u = new Url('http://localhost/path+with+plus');
         assert.equal(u.toString(), 'http://localhost/path%2bwith%2bplus');
     });
+    it('should correctly encode path with both (+) and ( )', function(){
+        const u  = new Url('http://localhost/path+ with+ plus')
+        assert.equal(u.toString(), 'http://localhost/path%2b%20with%2b%20plus');
+    })
 });
+
+describe('Path and query encoding differences', function(){
+    it('should correctly encode whitespaces in both query and path', function(){
+        const u = new Url('http://localhost/path with space?name=hello world')
+        assert.equal(u.toString(), 'http://localhost/path%20with%20space?name=hello%20world')
+    });
+    it('should correctly encode (+) in both query and path', function(){
+        const u = new Url('http://localhost/path+with+space?name=hello world')
+        assert.equal(u.toString(), 'http://localhost/path%2bwith%2bspace?name=hello%20world')
+    })
+})
