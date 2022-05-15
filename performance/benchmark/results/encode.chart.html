@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <title>encode function</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #ddd;
+      }
+
+      .container {
+        box-sizing: border-box;
+        height: 96vh;
+        width: 96vw;
+        margin: 2vh 2vw;
+        resize: both;
+        overflow: hidden;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 0 15px #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="chart1652568726732" width="16" height="9"></canvas>
+    </div>
+    <script>
+      const format = (num) => {
+        const [whole, fraction] = String(num).split('.')
+        const chunked = []
+        whole
+          .split('')
+          .reverse()
+          .forEach((char, index) => {
+            if (index % 3 === 0) {
+              chunked.unshift([char])
+            } else {
+              chunked[0].unshift(char)
+            }
+          })
+
+        const fractionStr = fraction !== undefined ? '.' + fraction : ''
+
+        return (
+          chunked.map((chunk) => chunk.join('')).join(' ') + fractionStr
+        )
+      }
+      const ctx1652568726732 = document
+        .getElementById('chart1652568726732')
+        .getContext('2d')
+      const chart1652568726732 = new Chart(ctx1652568726732, {
+        type: 'bar',
+        data: {
+          labels: ["empty url","short gibbrish","medium gibbrish","long gibbrish ","short url","short url with short gibbrish","short url with medium gibbrish","short url with long gibbrish","medium url","medium url with short gibbrish","medium url with medium gibbrish ","medium url with long gibbrish ","long url","long url with short gibbrish","long url with medium gibbrish ","long url with long gibbrish "],
+          datasets: [
+            {
+              data: [840453,766010,583618,482729,412707,253433,216622,189691,182965,141832,114553,99530,226930,164637,132781,115982],
+              backgroundColor: ["hsl(120, 85%, 55%)","hsl(109.368, 85%, 55%)","hsl(83.328, 85%, 55%)","hsl(68.928, 85%, 55%)","hsl(58.931999999999995, 85%, 55%)","hsl(36.18000000000001, 85%, 55%)","hsl(30.924, 85%, 55%)","hsl(27.083999999999993, 85%, 55%)","hsl(26.123999999999995, 85%, 55%)","hsl(20.255999999999993, 85%, 55%)","hsl(16.355999999999995, 85%, 55%)","hsl(14.208000000000004, 85%, 55%)","hsl(32.400000000000006, 85%, 55%)","hsl(23.508000000000006, 85%, 55%)","hsl(18.959999999999997, 85%, 55%)","hsl(16.56, 85%, 55%)"],
+              borderColor: ["hsl(120, 85%, 55%)","hsl(109.368, 85%, 55%)","hsl(83.328, 85%, 55%)","hsl(68.928, 85%, 55%)","hsl(58.931999999999995, 85%, 55%)","hsl(36.18000000000001, 85%, 55%)","hsl(30.924, 85%, 55%)","hsl(27.083999999999993, 85%, 55%)","hsl(26.123999999999995, 85%, 55%)","hsl(20.255999999999993, 85%, 55%)","hsl(16.355999999999995, 85%, 55%)","hsl(14.208000000000004, 85%, 55%)","hsl(32.400000000000006, 85%, 55%)","hsl(23.508000000000006, 85%, 55%)","hsl(18.959999999999997, 85%, 55%)","hsl(16.56, 85%, 55%)"],
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: 'encode function',
+              font: { size: 20 },
+              padding: 20,
+            },
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              callbacks: {
+                label: (context) => {
+                  return format(context.parsed.y) + ' ops/s'
+                },
+              },
+              displayColors: false,
+              backgroundColor: '#222222',
+              padding: 10,
+              cornerRadius: 5,
+              intersect: false,
+            },
+          },
+          scales: {
+            x: {
+              grid: {
+                color: '#888888',
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Operations per second',
+                padding: 10,
+              },
+              grid: {
+                color: '#888888',
+              },
+            },
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

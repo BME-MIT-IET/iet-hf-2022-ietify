@@ -49,6 +49,7 @@
     "test": "test"
   },
   "dependencies": {
+    "benny": "^3.7.1",
     "@cucumber/cucumber": "^8.2.1",
     "ansi-colors": "^3.2.3",
     "ansi-regex": "^2.1.1",
