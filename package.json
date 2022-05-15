@@ -41,11 +41,6 @@
     "mocha": "^7.1.1",
     "uglify-js": "^3.8.1"
   },
-
-  "dependencies": {
-    "benny": "^3.7.1"
-  }
-
   "bugs": {
     "url": "https://github.com/Mikhus/domurl/issues"
   },
@@ -54,6 +49,7 @@
     "test": "test"
   },
   "dependencies": {
+    "benny": "^3.7.1",
     "@cucumber/cucumber": "^8.2.1",
     "ansi-colors": "^3.2.3",
     "ansi-regex": "^2.1.1",
@@ -257,5 +253,4 @@
     "yargs-unparser": "^1.6.0"
   },
   "author": ""
-
 }
